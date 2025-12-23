@@ -33,10 +33,6 @@ const approveBorrowing = asyncHandler(async (req, res) => {
   // 2. Ambil data item (stok saat ini)
   const itemData = await grpcCall(itemClient, 'GetItem', { id: borrowRequest.item_id });
 
-  /** ------------------------------
-   * PERBAIKAN LOGIKA DI SINI
-   * total_quantity baru = total_quantity lama - quantity dipinjam
-   --------------------------------*/
   const newTotalQuantity =
       itemData.item.total_quantity - borrowRequest.quantity;
 
@@ -46,13 +42,13 @@ const approveBorrowing = asyncHandler(async (req, res) => {
     });
   }
 
-  // 3. Update total_quantity di item-service
+  
   await grpcCall(itemClient, 'UpdateItem', {
     id: borrowRequest.item_id,
     total_quantity: newTotalQuantity
   });
 
-  // 4. Kirim notifikasi ke user
+  
   await grpcCall(notificationClient, 'SendNotification', {
       user_id: borrowRequest.user_id,
       message: `Peminjaman Anda untuk ${itemData.item.name} (ID: ${borrowRequest.id}) telah disetujui.`,
@@ -103,7 +99,7 @@ const markAsReturnedByAdmin = asyncHandler(async (req, res) => {
 
     const itemData = await grpcCall(itemClient, 'GetItem', { id: borrowRequest.item_id });
 
-    /** Saat kembali → total_quantity ditambah **/
+    
     const newTotalQuantity =
         itemData.item.total_quantity + borrowRequest.quantity;
 

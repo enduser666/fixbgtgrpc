@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const { errorHandler } = require('./middlewares/errorMiddleware');
 const allRoutes = require('./routes');
-const path = require('path'); // <-- TAMBAHKAN
+const path = require('path'); 
 
 dotenv.config();
 const app = express();
@@ -12,8 +12,7 @@ app.use(cors());
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false }));
 
-// --- TAMBAHKAN INI ---
-// Sajikan file statis dari folder 'public/uploads'
+
 app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
 // ---------------------
 

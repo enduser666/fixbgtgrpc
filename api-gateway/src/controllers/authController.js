@@ -35,7 +35,7 @@ const loginUser = asyncHandler(async (req, res) => {
     name: response.user.name,
     email: response.user.email,
     role: response.user.role,
-    phone_number: response.user.phone_number, // Kirim phone_number
+    phone_number: response.user.phone_number, 
     token: response.token,
   });
 });

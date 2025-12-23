@@ -10,9 +10,7 @@ const getItemById = (id) => {
   return api.get(`/items/${id}`);
 };
 
-// ===============================================
-// FUNGSI KHUSUS ADMIN
-// ===============================================
+
 
 const createItem = (formData) => {
   return api.post('/items', formData, {

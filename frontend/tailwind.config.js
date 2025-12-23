@@ -7,12 +7,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Kita gunakan palet 'indigo' dari Tailwind
-        // untuk mencocokkan warna biru di PDF Anda [cite: 37, 76, 82]
+        
         primary: {
-          DEFAULT: '#4338CA', // Mirip dengan indigo-700
-          light: '#6366F1', // indigo-500
-          dark: '#312E81', // indigo-900
+          DEFAULT: '#4338CA', // 
+          light: '#6366F1', // 
+          dark: '#312E81', // 
         }
       }
     },

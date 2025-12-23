@@ -37,7 +37,7 @@ const getMyBorrowings = asyncHandler(async (req, res) => {
   res.status(200).json(response.borrow_requests);
 });
 
-// Fungsi returnItemByUser Dihapus
+
 
 module.exports = {
   createBorrowRequest,
