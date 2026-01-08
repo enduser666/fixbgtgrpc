@@ -18,7 +18,7 @@ message RegisterRequest {
   string name = 1;
   string email = 2;
   string password = 3;
-  string phone_number = 4; // TAMBAHKAN
+  string phone_number = 4;
 }
 
 message LoginRequest {
@@ -50,7 +50,7 @@ message User {
   string role = 4; 
   string created_at = 5;
   string phone_number = 6;
-  string profile_picture = 7;
+  string profile_picture = 7; // Pastikan nomor 7 ada di kedua sisi
 }
 
 message UserResponse {
