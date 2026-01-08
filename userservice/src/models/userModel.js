@@ -37,6 +37,10 @@ const User = sequelize.define(
       defaultValue: 'user',
       allowNull: false,
     },
+    profilePicture: {
+      type: DataTypes.TEXT('long'), // Menggunakan TEXT karena Base64 berukuran besar
+      allowNull: true,
+    },
   },
   {
     tableName: 'users',

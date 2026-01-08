@@ -39,7 +39,8 @@ message UpdateUserRequest {
   string name = 2;
   string email = 3;
   string role = 4;
-  string phone_number = 5; // TAMBAHKAN
+  string phone_number = 5;
+  string profile_picture = 6;
 }
 
 message User {
@@ -48,7 +49,8 @@ message User {
   string email = 3;
   string role = 4; 
   string created_at = 5;
-  string phone_number = 6; // TAMBAHKAN
+  string phone_number = 6;
+  string profile_picture = 7;
 }
 
 message UserResponse {

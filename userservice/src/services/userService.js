@@ -147,8 +147,7 @@ const userService = {
       }));
 
       callback(null, { users: userList });
-    } catch (error)
- {
+    } catch (error) {
       console.error(error);
       callback({
         code: grpc.status.INTERNAL,
@@ -157,12 +156,75 @@ const userService = {
     }
   },
 
-  // Implementasikan fungsi UpdateUser dan DeleteUser
+  // Implementasi Fungsi UpdateUser (Dengan perbaikan logika Admin Role)
   UpdateUser: async (call, callback) => {
-    // ... (Logika untuk update user) ...
+    const { id, name, email, role, phone_number } = call.request;
+    
+    try {
+      const user = await User.findByPk(id);
+      
+      if (!user) {
+        return callback({
+          code: grpc.status.NOT_FOUND,
+          message: 'User not found',
+        });
+      }
+
+      
+      if (name) user.name = name;
+      if (email) user.email = email;
+      if (phone_number) user.phoneNumber = phone_number;
+
+      
+      if (role && role.trim() !== '') {
+        user.role = role;
+      }
+
+      await user.save();
+
+      callback(null, {
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          phone_number: user.phoneNumber,
+          created_at: user.createdAt.toISOString(),
+        }
+      });
+
+    } catch (error) {
+      console.error("UpdateUser Error:", error);
+      callback({
+        code: grpc.status.INTERNAL,
+        message: error.message,
+      });
+    }
   },
+
+  // Implementasi Fungsi DeleteUser
   DeleteUser: async (call, callback) => {
-    // ... (Logika untuk delete user) ...
+    const { id } = call.request;
+    try {
+      const user = await User.findByPk(id);
+
+      if (!user) {
+        return callback({
+          code: grpc.status.NOT_FOUND,
+          message: 'User not found',
+        });
+      }
+
+      await user.destroy();
+      callback(null, {}); 
+
+    } catch (error) {
+      console.error("DeleteUser Error:", error);
+      callback({
+        code: grpc.status.INTERNAL,
+        message: error.message,
+      });
+    }
   },
 };
 
