@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package user;
 
+// Definisi layanan UserService
 service UserService {
   rpc Register(RegisterRequest) returns (UserResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
@@ -12,8 +13,10 @@ service UserService {
   rpc DeleteUser(GetUserRequest) returns (Empty);
 }
 
+// Pesan kosong untuk rpc DeleteUser
 message Empty {}
 
+// Request untuk registrasi user baru
 message RegisterRequest {
   string name = 1;
   string email = 2;
@@ -21,47 +24,55 @@ message RegisterRequest {
   string phone_number = 4;
 }
 
+// Request untuk login
 message LoginRequest {
   string email = 1;
   string password = 2;
 }
 
+// Request untuk mengambil data user berdasarkan ID
 message GetUserRequest {
   string id = 1;
 }
 
+// Request untuk list user dengan filter role
 message ListUsersRequest {
-  string role_filter = 1; 
+  string role_filter = 1;
 }
 
+// Request untuk memperbarui data user
 message UpdateUserRequest {
   string id = 1;
   string name = 2;
   string email = 3;
-  string role = 4;
+  string role = 4;           // Tag nomor 4 untuk role
   string phone_number = 5;
   string profile_picture = 6;
 }
 
+// Struktur data User utama
 message User {
   string id = 1;
   string name = 2;
   string email = 3;
-  string role = 4; 
+  string role = 4;           // Tag nomor 4 wajib sama di kedua sisi
   string created_at = 5;
   string phone_number = 6;
-  string profile_picture = 7; // Pastikan nomor 7 ada di kedua sisi
+  string profile_picture = 7;
 }
 
+// Response berisi objek user tunggal
 message UserResponse {
   User user = 1;
 }
 
+// Response login berisi user dan token JWT
 message LoginResponse {
   User user = 1;
   string token = 2;
 }
 
+// Response list user berisi array/repeated user
 message UserListResponse {
   repeated User users = 1;
 }
